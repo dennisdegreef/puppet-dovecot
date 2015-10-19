@@ -22,7 +22,7 @@ class dovecot::config inherits dovecot {
   }
 
   if $dovecot::imap {
-    file { "$dovecot::confd_dir/20-imap.conf":
+    file { "${dovecot::confd_dir}/20-imap.conf":
       ensure  => file,
       owner   => 0,
       group   => 0,
@@ -48,7 +48,7 @@ class dovecot::config inherits dovecot {
       false => 'yes',
     }
 
-    file { "$dovecot::confd_dir/10-ssl.conf":
+    file { "${dovecot::confd_dir}/10-ssl.conf":
       ensure  => file,
       owner   => 0,
       group   => 0,
