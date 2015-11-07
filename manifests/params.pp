@@ -19,31 +19,33 @@ class dovecot::params {
     default        => '/etc',
   }
 
-  $config_dir               = "${etc_directory}/dovecot"
-  $confd_dir                = "${config_dir}/conf.d"
+  $config_dir                = "${etc_directory}/dovecot"
+  $confd_dir                 = "${config_dir}/conf.d"
 
-  $config                   = "${config_dir}/dovecot.conf"
-  $config_template          = 'dovecot/dovecot.conf.erb'
+  $config                    = "${config_dir}/dovecot.conf"
+  $config_template           = 'dovecot/dovecot.conf.erb'
 
-  $instance_name            = 'dovecot'
-  $shutdown_clients         = true
-  $base_dir                 = '/var/run/dovecot/'
-  $verbose_proctitle        = false
-  $greeting                 = 'Dovecot ready.'
+  $instance_name             = 'dovecot'
+  $shutdown_clients          = true
+  $base_dir                  = '/var/run/dovecot/'
+  $verbose_proctitle         = false
+  $greeting                  = 'Dovecot ready.'
 
-  $ssl                      = false
-  $ssl_required             = false
-  $ssl_config_template      = 'dovecot/ssl.conf.erb'
-  $ssl_cert                 = "${config_dir}/dovecot.pem"
-  $ssl_key                  = "${config_dir}/private/dovecot.pem"
-  $ssl_key_password         = undef
-  $ssl_require_crl          = true
-  $ssl_ca                   = undef
-  $ssl_dh_parameters_length = 2048 # dont logjam
+  $ssl                       = false
+  $ssl_required              = false
+  $ssl_config_template       = 'dovecot/ssl.conf.erb'
+  $ssl_cert                  = "${config_dir}/dovecot.pem"
+  $ssl_key                   = "${config_dir}/private/dovecot.pem"
+  $ssl_key_password          = undef
+  $ssl_require_crl           = true
+  $ssl_ca                    = undef
+  $ssl_dh_parameters_length  = 2048 # dont logjam
+  $ssl_prefer_server_ciphers = false
+  $ssl_cipher_list           = 'ALL:!LOW:!SSLv2:!EXP:!aNULL'
 
-  $imap                     = false
-  $imap_config_template     = 'dovecot/imap.conf.erb'
-  $imap_max_line_length     = '64k'
-  $imap_logout_format       = 'in=%i out=%o'
+  $imap                      = false
+  $imap_config_template      = 'dovecot/imap.conf.erb'
+  $imap_max_line_length      = '64k'
+  $imap_logout_format        = 'in=%i out=%o'
 
 }

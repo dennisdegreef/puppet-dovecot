@@ -48,6 +48,11 @@ class dovecot::config inherits dovecot {
       false => 'yes',
     }
 
+    $real_ssl_prefer_server_ciphers = $dovecot::ssl_prefer_server_ciphers ? {
+      true  => 'yes',
+      false => 'no',
+    }
+
     file { "${dovecot::confd_dir}/10-ssl.conf":
       ensure  => file,
       owner   => 0,

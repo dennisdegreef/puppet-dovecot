@@ -1,40 +1,42 @@
 
 class dovecot (
 
-  $package_name             = $dovecot::params::package_name,
-  $package_manage           = $dovecot::params::package_manage,
-  $package_ensure           = $dovecot::params::package_ensure,
+  $package_name              = $dovecot::params::package_name,
+  $package_manage            = $dovecot::params::package_manage,
+  $package_ensure            = $dovecot::params::package_ensure,
 
-  $service_name             = $dovecot::params::service_name,
-  $service_manage           = $dovecot::params::service_manage,
-  $service_enable           = $dovecot::params::service_enable,
-  $service_ensure           = $dovecot::params::service_ensure,
+  $service_name              = $dovecot::params::service_name,
+  $service_manage            = $dovecot::params::service_manage,
+  $service_enable            = $dovecot::params::service_enable,
+  $service_ensure            = $dovecot::params::service_ensure,
 
-  $config                   = $dovecot::params::config,
-  $config_template          = $dovecot::params::config_template,
-  $config_dir               = $dovecot::params::config_dir,
-  $confd_dir                = $dovecot::params::confd_dir,
+  $config                    = $dovecot::params::config,
+  $config_template           = $dovecot::params::config_template,
+  $config_dir                = $dovecot::params::config_dir,
+  $confd_dir                 = $dovecot::params::confd_dir,
 
-  $instance_name            = $dovecot::params::instance_name,
-  $shutdown_clients         = $dovecot::params::shutdown_clients,
-  $base_dir                 = $dovecot::params::base_dir,
-  $verbose_proctitle        = $dovecot::params::verbose_proctitle,
-  $greeting                 = $dovecot::params::greeting,
+  $instance_name             = $dovecot::params::instance_name,
+  $shutdown_clients          = $dovecot::params::shutdown_clients,
+  $base_dir                  = $dovecot::params::base_dir,
+  $verbose_proctitle         = $dovecot::params::verbose_proctitle,
+  $greeting                  = $dovecot::params::greeting,
 
-  $ssl                      = $dovecot::params::ssl,
-  $ssl_required             = $dovecot::params::ssl_required,
-  $ssl_config_template      = $dovecot::params::ssl_config_template,
-  $ssl_cert                 = $dovecot::params::ssl_cert,
-  $ssl_key                  = $dovecot::params::ssl_key,
-  $ssl_key_password         = $dovecot::params::ssl_key_password,
-  $ssl_require_crl          = $dovecot::params::ssl_require_crl,
-  $ssl_ca                   = $dovecot::params::ssl_ca,
-  $ssl_dh_parameters_length = $dovecot::params::ssl_dh_parameters_length,
+  $ssl                       = $dovecot::params::ssl,
+  $ssl_required              = $dovecot::params::ssl_required,
+  $ssl_config_template       = $dovecot::params::ssl_config_template,
+  $ssl_cert                  = $dovecot::params::ssl_cert,
+  $ssl_key                   = $dovecot::params::ssl_key,
+  $ssl_key_password          = $dovecot::params::ssl_key_password,
+  $ssl_require_crl           = $dovecot::params::ssl_require_crl,
+  $ssl_ca                    = $dovecot::params::ssl_ca,
+  $ssl_dh_parameters_length  = $dovecot::params::ssl_dh_parameters_length,
+  $ssl_prefer_server_ciphers = $dovecot::params::ssl_prefer_server_ciphers,
+  $ssl_cipher_list           = $dovecot::params::ssl_cipher_list,
 
-  $imap                     = $dovecot::params::imap,
-  $imap_config_template     = $dovecot::params::imap_config_template,
-  $imap_max_line_length     = $dovecot::params::imap_max_line_length,
-  $imap_logout_format       = $dovecot::params::imap_logout_format,
+  $imap                      = $dovecot::params::imap,
+  $imap_config_template      = $dovecot::params::imap_config_template,
+  $imap_max_line_length      = $dovecot::params::imap_max_line_length,
+  $imap_logout_format        = $dovecot::params::imap_logout_format,
 
 ) inherits dovecot::params {
 
@@ -73,6 +75,8 @@ class dovecot (
   validate_bool($ssl_require_crl)
   validate_string($ssl_ca)
   validate_integer($ssl_dh_parameters_length)
+  validate_bool($ssl_prefer_server_ciphers)
+  validate_string($ssl_cipher_list)
 
   validate_bool($imap)
   validate_string($imap_config_template)

@@ -56,9 +56,11 @@ ssl_dh_parameters_length = <%= @ssl_dh_parameters_length %>
 
 # SSL ciphers to use
 #ssl_cipher_list = ALL:!LOW:!SSLv2:!EXP:!aNULL
+ssl_cipher_list = <%= @ssl_cipher_list %>
 
 # Prefer the server's order of ciphers over client's.
 #ssl_prefer_server_ciphers = no
+ssl_prefer_server_ciphers = <%= @real_ssl_prefer_server_ciphers %>
 
 # SSL crypto device to use, for valid values run "openssl engine"
 #ssl_crypto_device =
