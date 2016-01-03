@@ -31,6 +31,8 @@ class dovecot::params {
   $verbose_proctitle         = false
   $greeting                  = 'Dovecot ready.'
 
+  $protocols                 = []
+
   $ssl                       = false
   $ssl_required              = false
   $ssl_config_template       = 'dovecot/ssl.conf.erb'
@@ -47,5 +49,13 @@ class dovecot::params {
   $imap_config_template      = 'dovecot/imap.conf.erb'
   $imap_max_line_length      = '64k'
   $imap_logout_format        = 'in=%i out=%o'
+
+  $lmtp                      = false
+
+  $use_mysql                 = false
+
+  $mail_location_root        = '/var/mail/mailserver'
+  $mail_location             = "${mail_location_root}/%d/%n"
+  $mail_format               = 'maildir'
 
 }

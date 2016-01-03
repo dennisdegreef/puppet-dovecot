@@ -21,6 +21,8 @@ class dovecot (
   $verbose_proctitle         = $dovecot::params::verbose_proctitle,
   $greeting                  = $dovecot::params::greeting,
 
+  $protocols                 = $dovecot::params::protocols,
+
   $ssl                       = $dovecot::params::ssl,
   $ssl_required              = $dovecot::params::ssl_required,
   $ssl_config_template       = $dovecot::params::ssl_config_template,
@@ -37,6 +39,14 @@ class dovecot (
   $imap_config_template      = $dovecot::params::imap_config_template,
   $imap_max_line_length      = $dovecot::params::imap_max_line_length,
   $imap_logout_format        = $dovecot::params::imap_logout_format,
+
+  $lmtp                      = $dovecot::params::lmtp,
+
+  $use_mysql                 = $dovecot::params::use_mysql,
+
+  $mail_location_root        = $dovecot::params::mail_location_root,
+  $mail_location             = $dovecot::params::mail_location,
+  $mail_format               = $dovecot::params::mail_format,
 
 ) inherits dovecot::params {
 
@@ -64,6 +74,8 @@ class dovecot (
   validate_bool($verbose_proctitle)
   validate_string($greeting)
 
+  validate_array($protocols)
+
   validate_bool($ssl)
   validate_string($ssl_config_template)
   validate_string($ssl_cert)
@@ -82,6 +94,27 @@ class dovecot (
   validate_string($imap_config_template)
   validate_string($imap_max_line_length)
   validate_string($imap_logout_format)
+
+  validate_bool($lmtp)
+
+  if empty($protocols) {
+    if $imap {
+      if $lmtp {
+        $real_protocols = ['imap', 'lmtp']
+      } else {
+        $real_protocols = ['imap']
+      }
+    } else {
+      if $lmtp {
+        $real_protocols = ['lmtp']
+      } else {
+        $real_protocols = []
+      }
+    }
+  } else {
+    $real_protocols = $protocols
+  }
+  $real_protocols_string = join($real_protocols, ' ')
 
   # Anchor this as per #8040 - this ensures that classes won't float off and
   # mess everything up.  You can read about this at:

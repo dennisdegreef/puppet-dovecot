@@ -62,4 +62,11 @@ class dovecot::config inherits dovecot {
       notify  => Service[$dovecot::service_name],
     }
   }
+
+  file { $dovecot::mail_location_root:
+    ensure => directory,
+    owner  => 0,
+    group  => "mail",
+    mode   => "0770",
+  }
 }

@@ -13,4 +13,20 @@ class dovecot::install inherits dovecot {
       }
     }
   }
+
+  if $dovecot::lmtp {
+    if $::operatingsystem == 'Debian' {
+      package { 'dovecot-lmtpd':
+        ensure => installed,
+      }
+    }
+  }
+
+  if $dovecot::use_mysql {
+    if $::operatingsystem == 'Debian' {
+      package { 'dovecot-mysql':
+        ensure => installed,
+      }
+    }
+  }
 }
